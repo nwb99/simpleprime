@@ -21,18 +21,19 @@ int main(int argc, char **argv)
     int qty;
 
     if (argc < 2) {
-        printf("usage: %s [integer]\nwhere integer is the quantity of primes to generate, less than 1 million.\n", argv[0]);
+        fprintf(stderr, "usage: %s [integer]\nwhere integer is the quantity of "
+                "primes to generate, less than 1 million.\n", argv[0]);
     }
     else if (atoi(argv[1]) > 1000000) {
-        printf("error: must be less than 1,000,000\n");
-        return 1;
+        fprintf(stderr, "error: must be less than 1,000,000\n");
+        return EXIT_FAILURE;
     }
     else if (atoi(argv[1]) > 0) {
         qty = atoi(argv[1]);
     }
     else {
-        printf("%s: %s: invalid input\n", argv[0], argv[1]);
-        return 1;
+        fprintf(stderr, "%s: %s: invalid input\n", argv[0], argv[1]);
+        return EXIT_FAILURE;
     }
     
     /*
@@ -69,5 +70,5 @@ int main(int argc, char **argv)
             ++k;
         }
     }
-    return 0;
+    return EXIT_SUCCESS;
 }
