@@ -22,9 +22,14 @@ check() {
 
 check
 
+if [ -s "results.txt" ]
+then
+	printf "\n%s\n" "----------------" | tee -a results.txt
+fi
+
 for i in ./prime_*
 do
-	printf "%s" "$i" | tee -a results.txt
-	time $($i 20000 > /dev/null) | tee -a results.txt
+	printf "%s\n" "$i" | tee -a results.txt
+	{ time $i 20000 > /dev/null 2>&1 ; } |& tee -a results.txt
 	printf "%s\n" "----------------" | tee -a results.txt
 done
